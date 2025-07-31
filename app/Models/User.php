@@ -42,4 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // ----- Relationships -----
+    // 1:M
+    public function tasks() {
+        return $this->hasMany(Task::class);
+    }
+    
 }

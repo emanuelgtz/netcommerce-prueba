@@ -18,6 +18,13 @@ return new class extends Migration
             $table->boolean('is_completed');
             $table->timestamp('start_at');
             $table->timestamp('expired_at');
+            // FK - user_id company_id
+            $table->foreignId('user_id')->constrained(
+                table: 'users'
+            );
+            $table->foreignId('company_id')->constrained(
+                table: 'companies'
+            );
             $table->timestamps();
         });
     }
