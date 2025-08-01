@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+return new class extends Migration 
 {
     /**
      * Run the migrations.
@@ -19,12 +19,8 @@ return new class extends Migration
             $table->timestamp('start_at');
             $table->timestamp('expired_at');
             // FK - user_id company_id
-            $table->foreignId('user_id')->constrained(
-                table: 'users'
-            );
-            $table->foreignId('company_id')->constrained(
-                table: 'companies'
-            );
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('company_id')->constrained();
             $table->timestamps();
         });
     }
