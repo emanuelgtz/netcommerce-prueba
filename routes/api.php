@@ -22,4 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/company/{search?}', [CompanyController::class, 'index']);
 
-Route::post('/task', [TaskController::class, 'store']);
+Route::post('/task2', [TaskController::class, 'store']);

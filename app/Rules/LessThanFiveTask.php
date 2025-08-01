@@ -18,6 +18,11 @@ class LessThanFiveTask implements ValidationRule
         //
         $user = User::find($value);
 
+        if (!$user) {
+            $fail("The specified user does not exist.");
+            return;
+        }
+
         $userTasks = $user->tasks()->count();
 
         if ($userTasks >= 5) {
