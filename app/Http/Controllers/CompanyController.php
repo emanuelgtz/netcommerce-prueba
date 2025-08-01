@@ -2,27 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
     //
-    public function index() {
-        $companies = Company::with('tasks')->get();
-        
-        return response()->json($companies);
-    }
+    public function index(Request $request, $search = null) {
+        if ($search) {
+            $result = Company::with('tasks')->find($search);
+            
+            if (!$result) {
+                return response()->json([
+                    'message' => 'This company does not exist, please, try another option.'
+                ], 404);
+            }
+            return response()->json( new CompanyResource($result));
+            
 
-    public function show(string $id)
-    {
-        //
-        $company = Company::with('tasks')->find($id);
-
-        if (!$company) {
-            return "This company does not exist, please, try another option.";
+        } else {
+            $result = Company::with('tasks')->get();
+            return response()->json(CompanyResource::collection($result));
         }
-
-        return response()->json($company);
+        
     }
 }
